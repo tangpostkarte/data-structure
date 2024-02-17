@@ -1,10 +1,23 @@
 #include <iostream>
 #include <cstring>
-#include <stdlib.h>
-#include <time.h>
 
 
 using namespace std;
+
+//逆序字符串
+void Reverse(char arr[], int size) {
+    char* p = arr;
+    char* q = arr + size - 1;
+
+    while (p < q) {
+        char ch = *p;
+        *p = *q;
+        *q = ch;
+
+        p++;
+        q--;
+    }
+}
 
 class Array {
 public:
@@ -91,19 +104,22 @@ private:
 };
 
 int main() {
-    Array arr;
-    srand(time(0));
-
-    for(int i = 0; i < 10; i++) {
-        arr.push_back(rand() % 100);
-    }
-    arr.show();
-
-    arr.pop_back();
-    arr.show();
-
-    arr.insert(0, 100);
-    arr.show();
+//    Array arr;
+//    srand(time(0));
+//
+//    for(int i = 0; i < 10; i++) {
+//        arr.push_back(rand() % 100);
+//    }
+//    arr.show();
+//
+//    arr.pop_back();
+//    arr.show();
+//
+//    arr.insert(0, 100);
+//    arr.show();
+    char arr[] = "Hello World!";
+    Reverse(arr, strlen(arr));
+    cout << arr << endl;
 
 
 }
