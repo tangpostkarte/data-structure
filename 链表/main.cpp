@@ -20,7 +20,7 @@ public:
     }
 
 public:
-    // 链表的尾插法
+    // 链表的尾插法 O(n)
     void insertTail(int val) {
 
         // 先找到当前链表的末尾节点
@@ -35,6 +35,27 @@ public:
         // 把新节点挂在尾节点的后面
         p -> next_ = node;
     }
+
+    // 链表的头插法 O(1)
+    void insertHead(int val) {
+        //创建新节点
+        Node * node = new Node(val);
+        //
+        node->next_ = head_ -> next_;
+        head_->next_ = node;
+    }
+
+    // 链表打印
+
+    void show () {
+        Node *p = head_ -> next_;
+
+        while (p != nullptr) {
+            cout << p->data_ << " ";
+            p = p->next_;
+        }
+        cout << endl;
+    }
 private:
     Node *head_; // 指向链表的头节点
 
@@ -42,5 +63,15 @@ private:
 
 int main() {
     std::cout << "Hello, World!555" << std::endl;
+    Clink clink;
+    srand(time(0));
+    for(int i = 0; i < 10; i++) {
+        int val = rand() % 100;
+        clink.insertTail(val);
+    }
+
+    clink.show();
+    clink.insertHead(44);
+    clink.show();
     return 0;
 }
