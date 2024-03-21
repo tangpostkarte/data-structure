@@ -109,7 +109,7 @@ private:
 
     //定义友元操作
     friend void ReverseLink(Clink &link);
-
+    friend bool GetLastKNode(Clink& link, int k, int& val);
 };
 
 
@@ -131,6 +131,31 @@ void ReverseLink(Clink &link) {
 
         p = q;
     }
+}
+
+// 求倒数第k个节点的值
+bool GetLastKNode(Clink& link, int k, int& val) {
+    Node* head = link.head_;
+    Node* pre = head;
+    Node* p = head;
+
+    for(int i = 0; i < k; i++) {
+        p = p->next_;
+
+        if (p == nullptr) {
+            return false;
+        }
+
+    }
+
+    // pre在头节点， p在正数第k个节点
+    while ( p != nullptr) {
+        pre = pre->next_;
+        p = p->next_;
+    }
+
+    val = pre->data_;
+    return true;
 }
 
 int main() {
@@ -157,8 +182,17 @@ int main() {
 //    clink.removeAll(44);
 //    clink.show();
 
-    ReverseLink(clink);
-    clink.show();
+//    ReverseLink(clink);
+//    clink.show();
+
+    int kval;
+    int k = 3;
+
+    if (GetLastKNode(clink, k, kval)) {
+        cout << "倒数第" << k << "个节点的值：" << kval << endl;
+    } else {
+
+    }
 
     return 0;
 }
