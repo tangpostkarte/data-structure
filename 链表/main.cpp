@@ -107,7 +107,31 @@ public:
 private:
     Node *head_; // 指向链表的头节点
 
+    //定义友元操作
+    friend void ReverseLink(Clink &link);
+
 };
+
+
+// 单链表逆序
+void ReverseLink(Clink &link) {
+    Node* p = link.head_->next_;
+    if (p == nullptr) {
+        return;
+    }
+
+    link.head_->next_ = nullptr;
+
+    while (p != nullptr) {
+        Node* q = p->next_;
+
+        // p指针指向的节点进行头插
+        p->next_ = link.head_->next_;
+        link.head_->next_ = p;
+
+        p = q;
+    }
+}
 
 int main() {
     std::cout << "Hello, World!555" << std::endl;
@@ -127,10 +151,14 @@ int main() {
 //    clink.show();
 
     // 测试删除所有
-    clink.insertTail(44);
-    clink.insertHead(44);
+//    clink.insertTail(44);
+//    clink.insertHead(44);
+//    clink.show();
+//    clink.removeAll(44);
+//    clink.show();
+
+    ReverseLink(clink);
     clink.show();
-    clink.removeAll(44);
-    clink.show();
+
     return 0;
 }
