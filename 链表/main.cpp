@@ -110,6 +110,7 @@ private:
     //定义友元操作
     friend void ReverseLink(Clink &link);
     friend bool GetLastKNode(Clink& link, int k, int& val);
+    friend void MergeLink(Clink& link1, Clink& link2);
 };
 
 
@@ -158,6 +159,32 @@ bool GetLastKNode(Clink& link, int k, int& val) {
     return true;
 }
 
+// 合并两个有序的单链表
+void MergeLink(Clink& link1, Clink& link2) {
+    Node* p = link1.head_->next_;
+    Node* q = link2.head_->next_;
+    Node* last = link1.head_;
+    link2.head_->next_ = nullptr;
+
+    while (p != nullptr && q != nullptr) {
+        if (p->data_ < q->data_) {
+            last->next_ = p;
+            p = p->next_;
+            last = last->next_;
+        } else {
+            last->next_ = q;
+            q = q->next_;
+            last = last->next_;
+        }
+    }
+
+    if (p != nullptr) {
+        last->next_ = p;
+    } else {
+        last->next_ = q;
+    }
+}
+
 int main() {
     std::cout << "Hello, World!555" << std::endl;
     Clink clink;
@@ -185,14 +212,35 @@ int main() {
 //    ReverseLink(clink);
 //    clink.show();
 
-    int kval;
-    int k = 3;
+//    int kval;
+//    int k = 3;
+//
+//    if (GetLastKNode(clink, k, kval)) {
+//        cout << "倒数第" << k << "个节点的值：" << kval << endl;
+//    } else {
+//
+//    }
 
-    if (GetLastKNode(clink, k, kval)) {
-        cout << "倒数第" << k << "个节点的值：" << kval << endl;
-    } else {
+    int arr[] = {25, 37, 52, 78, 88, 92, 98, 108};
+    int brr[] = {13, 23, 40, 56, 62, 77, 109};
 
+
+    Clink link1;
+    Clink link2;
+
+    for (int v : arr) {
+        link1.insertTail(v);
     }
+
+    for (int v: brr) {
+        link2.insertTail(v);
+    }
+
+    link1.show();
+    link2.show();
+
+    MergeLink(link1, link2);
+    link1.show();
 
     return 0;
 }
